@@ -1,6 +1,6 @@
 from flask import Flask, redirect, render_template, request, url_for
-from flask_login import current_user, login_required, login_user, LoginManager, logout_user, UserMixin
-#from flask_migrate import Migrate
+from flask_login import login_required, login_user, LoginManager, logout_user, UserMixin #add current_user back in later
+from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import check_password_hash
 
@@ -17,7 +17,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
 app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
-#migrate = Migrate(app, db)
+migrate = Migrate(app, db)
 
 app.secret_key = "SOMETHING RANDOM"
 login_manager = LoginManager()
@@ -74,17 +74,15 @@ class Grade(db.Model):
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-
-    print("Hello, World!")
-
-    #if request.method == "GET":
-    #    return render_template("main_page.html", comments=Comment.query.all())
+    print ('studentid')
+     #if request.method == "GET":
+      #  return render_template("main_page.html", student=Student.query.all())
 
     #if not current_user.is_authenticated:
-    #    return redirect(url_for('index'))
+     #   return redirect(url_for('index'))
 
     #comment = Comment(content=request.form["contents"], commenter=current_user)
-    #db.session.add(comment)
+    #db.session.add(grade)
     #db.session.commit()
     #return redirect(url_for('index'))
 
@@ -104,9 +102,9 @@ def login():
     return redirect(url_for('index'))
 
 
-#@app.route("/logout/")
-#@login_required
-#def logout():
-#    logout_user()
-#    return redirect(url_for('index'))
+@app.route("/logout/")
+@login_required
+def logout():
+     logout_user()
+     return redirect(url_for('index'))
 
