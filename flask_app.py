@@ -12,6 +12,7 @@ SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://{username}:{password}@{hostnam
     password="springis668",
     hostname="mygrade.mysql.pythonanywhere-services.com",
     databasename="mygrade$teamproject2",
+    #databasename="mygrade$dummyempty",
 )
 app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
 app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
@@ -72,19 +73,46 @@ class Grade(db.Model):
     assignment = db.relationship('Assignment', foreign_keys=assignmentid)
     grade = db.Column(db.Integer)
 
-@app.route("/", methods=["GET", "POST"])
-def index():
-    print ('studentid')
-     #if request.method == "GET":
-      #  return render_template("main_page.html", student=Student.query.all())
+
+#@app.route("/", methods=["GET", "POST"])
+@app.route("/")
+#def index():
+def stable():
+    #db = get_db()
+    #if request.method == "GET":
+
+        data = db.engine.execute("SELECT * FROM students")
+
+        #student = Student(content=request.form["contents"])
+
+        return render_template("main_page.html",data=data)
+        #student = (
+         #     'SELECT studentid, firstname, lastname, major, email'
+          #       ' FROM Student'
+           #      ' ORDER BY created DESC').fetchall()
+        #return render_template('main_page.html', student=Student.query.all())
 
     #if not current_user.is_authenticated:
      #   return redirect(url_for('index'))
 
-    #comment = Comment(content=request.form["contents"], commenter=current_user)
+    #student = Student(content=request.form["contents"], commenter=current_user)
     #db.session.add(grade)
     #db.session.commit()
     #return redirect(url_for('index'))
+
+
+#Gradebook
+@app.route("/grades")
+#def index():
+def grades():
+    #db = get_db()
+    #if request.method == "GET":
+
+        grade = db.engine.execute("SELECT * FROM grades")
+
+        #student = Student(content=request.form["contents"])
+
+        return render_template("main_page.html",grade=grade)
 
 @app.route("/login/", methods=["GET", "POST"])
 def login():

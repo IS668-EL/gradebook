@@ -8,23 +8,31 @@
         <title>Class Gradebook</title>
     </head>
 <body>
+    <h2> Student List {{data.firstname}}</h2>
 <table class="table">
-  <thead>
+      <thead>
     <tr>
       <th scope="col">Student ID</th>
       <th scope="col">First</th>
       <th scope="col">Last</th>
-      <th scope="col">Assignment</th>
-      <th scope="col">Grade</th>
+      <th scope="col">Major</th>
+      <th scope="col">Email</th>
     </tr>
   </thead>
   <tbody>
+    <% for i in data %>
     <tr>
+
       <th scope="row">1</th>
       <td>{{studentid}}</td>
-      <td>{{firstname}}</td>
-      <td>{{lastname}}</td>
+      <td>{{data.firstname}}</td>
+      <td>{{data.lastname}}</td>
+      <td>{{data.major}}</td>
+      <td>{{data.email}}</td>
+
     </tr>
-</div>
+    <% end for %>
+    </tbody>
+
 </body>
 </html>
