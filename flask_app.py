@@ -1,7 +1,9 @@
-from flask import Flask, redirect, render_template, request, url_for
-from flask_login import login_required, login_user, LoginManager, logout_user, UserMixin #add current_user back in later
+from flask import Flask, flash, redirect, render_template, request, url_for
+from flask_login import current_user, login_required, login_user, LoginManager, logout_user, UserMixin #add current_user back in later
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
+#from flask_wtf import Form
+#from wtforms import TextField
 from werkzeug.security import check_password_hash
 
 app = Flask(__name__)
@@ -54,6 +56,14 @@ class Student(db.Model):
     major = db.Column(db.String(50))
     email = db.Column(db.String(100))
 
+
+def __init__(self, firstname, lastname, major, email):
+   #self.studentid = studentid
+   self.firstname = firstname
+   self.lastname = lastname
+   self.major = major
+   self.email = email
+
 class Assignment(db.Model):
 
     __tablename__ = "assignments"
@@ -74,13 +84,22 @@ class Grade(db.Model):
     grade = db.Column(db.Integer)
 
 
-#@app.route("/", methods=["GET", "POST"])
-@app.route("/")
-#def index():
-def stable():
-    #db = get_db()
-    #if request.method == "GET":
 
+#class NewStudent(Form):
+
+# studentid = TextField("Student ID")
+# sfirstname = TextField("First Name")
+# slasttname = TextField("Last Name")
+# major = TextField("Major")
+# email = TextField("email")
+
+@app.route("/", methods=["GET", "POST"])
+#@app.route("/")
+def index():
+#def stable():
+    #db = get_db()
+    if request.method == "GET":
+        #return render_template('main_page.html', students = students.query.all() )
         data = db.engine.execute("SELECT * FROM students")
 
         #student = Student(content=request.form["contents"])
@@ -92,27 +111,50 @@ def stable():
            #      ' ORDER BY created DESC').fetchall()
         #return render_template('main_page.html', student=Student.query.all())
 
-    #if not current_user.is_authenticated:
-     #   return redirect(url_for('index'))
-
-    #student = Student(content=request.form["contents"], commenter=current_user)
-    #db.session.add(grade)
+        #db.engine.execute("INSERT INTO students(studentid, firstname, lastname, major, email) VALUES (%s,%s,%s,%s,%s)", (studentid, firstname, lastname, major, email))
+    #db.session.add(newstudent)
     #db.session.commit()
-    #return redirect(url_for('index'))
 
+
+    if not current_user.is_authenticated:
+        return redirect(url_for('index'))
+
+
+
+#Add student
+@app.route("/newstudent", methods=['GET', 'POST'])
+#def newstudent():
+    #form = NewStudent(newstudent.form)
+    #return render_template('newstudent.html', form = form)
+    #Student(form)
+
+def newstudent():
+   if request.method == 'POST':
+      if not request.form['firstname'] or not request.form['lastname'] or not request.form['major']:
+         flash('Please enter all the fields', 'error')
+      else:
+         students = Student(request.form['firstname'], request.form['lastname'], request.form['major'], request.form['email'])
+         db.session.add(students)
+         db.session.commit()
+         flash('Record was successfully added')
+         return redirect(url_for('index'))
+   return render_template('newstudent.html')
 
 #Gradebook
 @app.route("/grades")
-#def index():
+
 def grades():
     #db = get_db()
     #if request.method == "GET":
 
-        grade = db.engine.execute("SELECT * FROM grades")
+        grades = db.engine.execute("SELECT grades.id, grades.studentid, grades.assignmentid, grades.grade, students.firstname, students.lastname FROM grades, students WHERE grades.studentid = students.studentid;")
 
         #student = Student(content=request.form["contents"])
 
-        return render_template("main_page.html",grade=grade)
+        return render_template("grades_page.html",grades=grades)
+
+    # if not current_user.is_authenticated:
+      #  return redirect(url_
 
 @app.route("/login/", methods=["GET", "POST"])
 def login():

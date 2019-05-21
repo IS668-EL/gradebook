@@ -24,58 +24,36 @@
       </div>
       </nav>
 <body>
-<table class="table">
-      <thead>
-    <tr>
-      <th scope="col">Student ID</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Major</th>
-      <th scope="col">Email</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for data in data %}
-    <tr>
 
-      <th scope="row"> {{ data.studentid }}</th>
-      <td>{{ data.firstname }}</td>
-      <td>{{ data.lastname }}</td>
-      <td>{{ data.major }}</td>
-      <td>{{ data.email }}</td>
-
-    </tr>
-    {% endfor %}
-    </tbody>
-    </table>
-
-<form action="." role="form" method="POST">
+<form action="{{ request.path }}" role="form" method="POST">
 <div class="container">
   <div class="form-group">
       <div class="col-sm">
-        <label>Student Id</label>
-        <input type="integer" class="form-control form-control-sm" id="data.studentid" placeholder="Enter ID">
+         <label for = "studentid">Student Id</label><br>
+         <input type = "Integer" name = "studentid" placeholder = "Enter ID" /><br>
     </div>
 </div>
   <div class="form-group">
       <div class="col-sm">
-    <label>First Name</label>
-    <input type="string" class="form-control form-control-sm" id="data.firstname" placeholder="First Name">
+         <label for = "firstname">First Name</label><br>
+         <input type = "string" name = "firstname" placeholder = "Enter Name" /><br>
+    </div>
+  </div>
+  <div class="form-group">
+      <div class="col-sm">
+         <label for = "lastname">Last Name</label><br>
+         <input type = "string" name = "lastname" placeholder = "Enter Name" /><br>
+    </div>
+ </div>
+  <div class="form-group">
+      <div class="col-sm">
+         <label for = "major">Student Major</label><br>
+         <input type = "string" name = "major" placeholder = "Major" /><br>
   </div> </div>
   <div class="form-group">
       <div class="col-sm">
-    <label>Last Name</label>
-    <input type="string" class="form-control form-control-sm" id="data.lastname" placeholder="Last Name">
-  </div> </div>
-  <div class="form-group">
-      <div class="col-sm">
-    <td><label>Major</label>
-    <input type="string" class="form-control form-control-sm" id="data.major" placeholder="Major"></td>
-  </div> </div>
-  <div class="form-group">
-      <div class="col-sm">
-    <td><label>Student Email</label>
-    <input type="email" class="form-control form-control-sm" id="data.email" placeholder="Email"></td>
+        <label for = "email">Student Email</label><br>
+        <input type = "email" name = "email" placeholder = "Email" /><br>
   </div> </div>
   <button type="submit" class="btn btn-primary btn-sm" value="Submit">Add Student</button>
   </div>

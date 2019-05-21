@@ -8,31 +8,34 @@
         <title>Class Gradebook</title>
     </head>
 <body>
-    <h3> Student Grades </h3>
+    <h3> Class Grades </h3>
 <table class="table">
       <thead>
     <tr>
+      <th scope="col">Grade ID</th>
       <th scope="col">Student ID</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Major</th>
-      <th scope="col">Email</th>
+      <th scope="col">Student Name</th>
+      <th scope="col">Assignment Number</th>
+      <th scope="col">Assignment title</th>
+      <th scope="col">Grade</th>
     </tr>
   </thead>
   <tbody>
-    {% for data in data %}
+    {% for grades in grades %}
     <tr>
 
-      <th scope="row"> {{ data.studentid }}</th>
-      <td>{{ data.firstname }}</td>
-      <td>{{ data.lastname }}</td>
-      <td>{{ data.major }}</td>
-      <td>{{ data.email }}</td>
+      <th scope="row"> {{ grades.id }}</th>
+      <td>{{ grades.studentid }}</td>
+      <td>{{ grades.firstname }}</td>
+      <td>{{ grades.assignmentid }}</td>
+      <td>{{ grades.assignment }}</td>
+      <td>{{ grades.grade }}</td>
 
     </tr>
     {% endfor %}
-    <h4>Add New Student</h4>
+
             <tr>
+                <h4>Add New Grade</h4>
             <td><input>ID #</input></td>
             <td><input>First Name</input></td>
             <td><input>Last Name</input></td>
