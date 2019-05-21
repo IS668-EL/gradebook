@@ -25,38 +25,16 @@
       </nav>
 <body>
 
-<form action="{{ request.path }}" role="form" method="POST">
-<div class="container">
-  <div class="form-group">
-      <div class="col-sm">
-         <label for = "studentid">Student ID</label><br>
-         <input type = "string" name = "studentid" placeholder = "Student ID" /><br>
-    </div>
-  <div class="form-group">
-      <div class="col-sm">
-         <label for = "firstname">First Name</label><br>
-         <input type = "string" name = "firstname" placeholder = "Enter Name" /><br>
-    </div>
-  </div>
-  <div class="form-group">
-      <div class="col-sm">
-         <label for = "lastname">Last Name</label><br>
-         <input type = "string" name = "lastname" placeholder = "Enter Name" /><br>
-    </div>
- </div>
-  <div class="form-group">
-      <div class="col-sm">
-         <label for = "major">Student Major</label><br>
-         <input type = "string" name = "major" placeholder = "Major" /><br>
-  </div> </div>
-  <div class="form-group">
-      <div class="col-sm">
-        <label for = "email">Student Email</label><br>
-        <input type = "email" name = "email" placeholder = "Email" /><br>
-  </div> </div>
-  <button type="submit" class="btn btn-primary btn-sm" value="Submit">Add Student</button>
-  </div>
+
+
+<h2> Are you sure you want to delete {{ studentid }}? </h2>
+<form action="deletestudent" role="form" method="POST">
+   <button type="submit" class="btn btn-primary btn-sm" value="Submit"> Delete Student</button>
+   <a href = '{{url_for('index')}}'>
+   <button> Cancel</button>
+    </a>
 </form>
+
 
 </body>
 </html>

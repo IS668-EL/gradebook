@@ -7,8 +7,23 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <title>Class Gradebook</title>
     </head>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Gradebook</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="http://mygrade.pythonanywhere.com/">Student Roster </span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="http://mygrade.pythonanywhere.com/grades">Grades<span class="sr-only">(current)</a>
+      </li>
+      </div>
+      </nav>
 <body>
-    <h3> Class Grades </h3>
 <table class="table">
       <thead>
     <tr>
@@ -34,16 +49,9 @@
     </tr>
     {% endfor %}
 
-            <tr>
-                <h4>Add New Grade</h4>
-            <td><input>ID #</input></td>
-            <td><input>First Name</input></td>
-            <td><input>Last Name</input></td>
-            <td><input>Major</input></td>
-            <td><input>Email</input></td>
-            <td><button type="button" class="btn btn-primary">Add Student</button></td>
-</tr>
-            <td><button type="button" class="btn btn-secondary">Remove Student</button></td>
+
+            <td><button type="button" class="btn btn-primary">Add Grade</button></td>
+
 
         </tr>
     </tbody>

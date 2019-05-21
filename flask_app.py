@@ -57,8 +57,8 @@ class Student(db.Model):
     email = db.Column(db.String(100))
 
 
-    def __init__(self, firstname, lastname, major, email):
-         #self.studentid = studentid
+    def __init__(self, studentid, firstname, lastname, major, email):
+         self.studentid = studentid
          self.firstname = firstname
          self.lastname = lastname
          self.major = major
@@ -93,8 +93,9 @@ class Grade(db.Model):
 # major = TextField("Major")
 # email = TextField("email")
 
-@app.route("/", methods=["GET", "POST"])
-#@app.route("/")
+#@app.route("/", methods=["GET", "POST"])
+@app.route('/')
+@app.route('/students', methods=["GET", "POST"])
 def index():
 #def stable():
     #db = get_db()
@@ -123,22 +124,60 @@ def index():
 
 #Add student
 @app.route("/newstudent", methods=['GET', 'POST'])
-#def newstudent():
-    #form = NewStudent(newstudent.form)
-    #return render_template('newstudent.html', form = form)
-    #Student(form)
 
 def newstudent():
    if request.method == 'POST':
       if not request.form['firstname'] or not request.form['lastname'] or not request.form['major']:
          flash('Please enter all the fields', 'error')
       else:
-         students = Student(request.form['firstname'], request.form['lastname'], request.form['major'], request.form['email'])
+         students = Student(request.form['studentid'], request.form['firstname'], request.form['lastname'], request.form['major'], request.form['email'])
          db.session.add(students)
          db.session.commit()
          flash('Record was successfully added')
          return redirect(url_for('index'))
    return render_template('newstudent.html')
+
+#Update Student
+@app.route("/update_student", methods=['POST'])
+
+def update():
+
+    newfirstname = request.form.get("newfirstname")
+    oldfirstname = request.form.get("oldfirstname")
+    student = Student.query.filter_by(firstname=oldfirstname).first()
+    student.firstname = newfirstname
+    db.session.commit()
+    return redirect(url_for('index'))
+
+
+  #  newstudent = Student(request.form['newstudentid'], request.form['newfirstname'], request.form['newlastname'], request.form['newmajor'], request.form['newemail'])
+   # oldstudent = Student(request.form['oldstudentid'], request.form['oldfirstname'], request.form['oldlastname'], request.form['oldmajor'], request.form['oldemail'])
+
+    #student = Student.query.filter_by(student=oldstudent)
+    #newstudent = Student(student)
+    #if request.method == 'POST':
+     #    db.session.commit(newstudent)
+      #   return redirect(url_for('index'))
+    #else:
+     #   return render_template('update_student.html')
+
+#Delete student
+@app.route("/students/<int:studentid>/deletestudent/", methods=['GET', 'POST'])
+def deletestudent(studentid):
+
+   deletestudent = db.session.query(Student).filter_by(studentid = studentid).one()
+
+   #deletestudent = db.session.query(Student).filter_by(studentid = 'studentid', firstname = 'firstname', lastname = 'lastname', major = 'major', email = 'email')
+   if request.method == 'POST':
+       db.session.delete(deletestudent)
+       db.session.commit()
+       return redirect(url_for('index'))
+   else:
+        flash('Unable to delete', 'error')
+        return render_template('deletestudent.html',student = deletestudent)
+
+
+
 
 #Gradebook
 @app.route("/grades")
