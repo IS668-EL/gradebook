@@ -57,12 +57,12 @@ class Student(db.Model):
     email = db.Column(db.String(100))
 
 
-def __init__(self, firstname, lastname, major, email):
-   #self.studentid = studentid
-   self.firstname = firstname
-   self.lastname = lastname
-   self.major = major
-   self.email = email
+    def __init__(self, firstname, lastname, major, email):
+         #self.studentid = studentid
+         self.firstname = firstname
+         self.lastname = lastname
+         self.major = major
+         self.email = email
 
 class Assignment(db.Model):
 

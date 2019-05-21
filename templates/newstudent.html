@@ -16,10 +16,10 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="http://mygrade.pythonanywhere.com/">Student Roster <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="http://mygrade.pythonanywhere.com/">Student Roster </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="http://mygrade.pythonanywhere.com/grades">Grades</a>
+        <a class="nav-link" href="http://mygrade.pythonanywhere.com/grades">Grades <span class="sr-only">(current)</span></a>
       </li>
       </div>
       </nav>
@@ -27,12 +27,6 @@
 
 <form action="{{ request.path }}" role="form" method="POST">
 <div class="container">
-  <div class="form-group">
-      <div class="col-sm">
-         <label for = "studentid">Student Id</label><br>
-         <input type = "Integer" name = "studentid" placeholder = "Enter ID" /><br>
-    </div>
-</div>
   <div class="form-group">
       <div class="col-sm">
          <label for = "firstname">First Name</label><br>
