@@ -28,11 +28,13 @@
       <thead>
     <tr>
       <th scope="col">Grade ID</th>
-      <th scope="col">Student ID</th>
       <th scope="col">Student Name</th>
+      <th scope="col">Student ID</th>
       <th scope="col">Assignment Number</th>
       <th scope="col">Assignment title</th>
-      <th scope="col">Grade</th>
+      <th scope="col">Assignment Total</th>
+      <th scope="col">Grade Earned</th>
+      <th scope="col">Edit</th>
     </tr>
   </thead>
   <tbody>
@@ -40,17 +42,22 @@
     <tr>
 
       <th scope="row"> {{ grades.id }}</th>
+      <td>{{ grades.firstname + " " + grades.lastname }}</td>
       <td>{{ grades.studentid }}</td>
-      <td>{{ grades.firstname }}</td>
       <td>{{ grades.assignmentid }}</td>
-      <td>{{ grades.assignment }}</td>
+      <td>{{ grades.title }}</td>
+      <td>{{ grades.fullscore }}</td>
       <td>{{ grades.grade }}</td>
-
+      <td>
+                    <a href="{{ url_for('update_grades', id=grades.id) }}">
+                      <i class="fa fa-pencil"></i> Update
+                    </a>
+                  </td>
     </tr>
     {% endfor %}
 
 
-            <td><button type="button" class="btn btn-primary">Add Grade</button></td>
+
 
 
         </tr>

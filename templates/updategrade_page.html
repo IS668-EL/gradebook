@@ -24,43 +24,38 @@
       </div>
       </nav>
 <body>
-<h3>Class: IS 668 Enterprise Information Systems</h3>
-<table class="table">
-      <thead>
-    <tr>
-      <th scope="col">Student ID</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Major</th>
-      <th scope="col">Email</th>
-      <th scope="col">Edit/Delete</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for data in data %}
-    <tr>
-
-      <th scope="row"> {{ data.studentid }}</th>
-      <td>{{ data.firstname }}</td>
-      <td>{{ data.lastname }}</td>
-      <td>{{ data.major }}</td>
-      <td>{{ data.email }}</td>
-      <td> </td>
-      <td> <a href="{{ url_for('deletestudent', studentid = data.studentid) }}" style="margin-left: 10px;">Delete</a></td>
-      <td><a href="{{ url_for('update', studentid = data.studentid) }}" style="margin-left: 10px;" >Update Student</a></td>
-
-      <td> </td>
-
-    </tr>
-    {% endfor %}
 
 
+{% import "bootstrap/wtf.html" as wtf %}
 
-    </tbody>
-    </table>
-<a class="btn btn-primary btn-sm" href="http://mygrade.pythonanywhere.com/newstudent" role="button">Add Student</a>
+{% block title %}
 
 
+        <p><h5>Update Grade</h5></p>
+
+{% endblock %}
+{% block body %}
+<div class="content-section">
+ <div class="outer">
+    <div class="middle">
+      <div class="inner">
+        <div class="center">
+
+
+                <p><em><h6>Please enter new grade for this student</h6></em></p>
+
+            <br/>
+        <div class="container">
+        <div class="col-sm">
+            {{ wtf.quick_form(form) }}
+            </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
 
 </body>
 </html>
