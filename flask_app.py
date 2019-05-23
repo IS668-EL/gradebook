@@ -194,11 +194,12 @@ def update(studentid):
 
 
 #Delete student
-@app.route("/students/<int:studentid>/deletestudent/", methods=['GET', 'POST'])
+@app.route("/students/deletestudent/<int:studentid>", methods=['GET', 'POST'])
 def deletestudent(studentid):
     #first delete grades
-    deletegrade = Grade.query.get_or_404(studentid)
-    db.session.delete(deletegrade)
+    #deletegrade = Grade.query.get_or_404(studentid)
+    deletegrade = Grade.query.filter_by(studentid=studentid).all()
+    [db.session.delete(x) for x in deletegrade]
     db.session.commit()
 
     deletestudent = Student.query.get_or_404(studentid)
@@ -207,7 +208,7 @@ def deletestudent(studentid):
     flash('deleted!')
     return redirect(url_for('index'))
 
-    return render_template('deletestudent.html',student = deletestudent)
+    return render_template(title="Delete Student")
 
 
 #Gradebook
@@ -265,4 +266,3 @@ def login():
 def logout():
      logout_user()
      return redirect(url_for('index'))
-
