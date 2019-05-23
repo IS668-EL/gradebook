@@ -3,7 +3,6 @@ from flask_login import current_user, login_required, login_user, LoginManager, 
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import Form
-from wtforms import TextField
 from werkzeug.security import check_password_hash
 
 from flask_wtf import FlaskForm

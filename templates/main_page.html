@@ -45,7 +45,7 @@
       <td>{{ data.lastname }}</td>
       <td>{{ data.major }}</td>
       <td>{{ data.email }}</td>
-      <td> </td>
+
       <td> <a href="{{ url_for('deletestudent', studentid = data.studentid) }}" style="margin-left: 10px;">Delete</a></td>
       <td><a href="{{ url_for('update', studentid = data.studentid) }}" style="margin-left: 10px;" >Update Student</a></td>
 
