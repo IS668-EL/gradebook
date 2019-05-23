@@ -30,7 +30,7 @@
 {% block title %}
 
 
-        <p><h5>Update Student</h5></p>
+        <p><h5>Edit Student</h5></p>
 
 {% endblock %}
 {% block body %}
@@ -64,93 +64,3 @@
 
 
 
-<!-- <form action="update" role="form" method="POST">
-<div class="container">
-  <div class="form-group">
-      <div class="col-sm">
-         <label for = "studentid">Student ID</label><br>
-         <input type = "string" name = "studentid" placeholder = "Student ID" /><br>
-    </div>
-  <div class="form-group">
-      <div class="col-sm">
-         <label for = "firstname">First Name</label><br>
-         <input type = "string" name = "firstname" placeholder = "Enter Name" /><br>
-    </div>
-  </div>
-  <div class="form-group">
-      <div class="col-sm">
-         <label for = "lastname">Last Name</label><br>
-         <input type = "string" name = "lastname" placeholder = "Enter Name" /><br>
-    </div>
- </div>
-  <div class="form-group">
-      <div class="col-sm">
-         <label for = "major">Student Major</label><br>
-         <input type = "string" name = "major" placeholder = "Major" /><br>
-  </div> </div>
-  <div class="form-group">
-      <div class="col-sm">
-        <label for = "email">Student Email</label><br>
-        <input type = "email" name = "email" placeholder = "Email" /><br>
-  </div> </div>
-  <button type="submit" class="btn btn-primary btn-sm" value="Submit">Update Student</button>
-  </div> -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<table class="table">
-      <thead>
-    <tr>
-      <th scope="col">Student ID</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Major</th>
-      <th scope="col">Email</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-<form action="{{ request.path }}" role="form" method="POST">
-      <th scope="row"> {{ data.studentid }}</th>
-      <td>{{ data.firstname }}
-       <form method="POST" action="update">
-        <input type="hidden" value="{{data.firstname}}" name="oldfirstname">
-        <input type="text" value="{{data.firstname}}" name="newfirstname">
-        <input type="submit" value="Update"></td>
-      <td>{{ data.lastname }}</td>
-      <td>{{ data.major }}</td>
-      <td>{{ data.email }}</td>
-      <td> </td>
-
-
-    </tr>
-    {% endfor %}
-    </tbody>
-    </table>
-<a class="btn btn-primary btn-sm" href="http://mygrade.pythonanywhere.com/newstudent" role="button">Add Student</a>
-
-
-</body>
-</html>

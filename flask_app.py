@@ -100,11 +100,12 @@ class Grade(db.Model):
 
 class NewStudent(Form):
 
- studentid = TextField("Student ID")
- sfirstname = TextField("First Name")
- slasttname = TextField("Last Name")
- major = TextField("Major")
- email = TextField("email")
+ studentid = StringField("Student ID", validators=[DataRequired()])
+ firstname = StringField("First Name", validators=[DataRequired()])
+ lastname = StringField("Last Name", validators=[DataRequired()])
+ major = StringField("Major", validators=[DataRequired()])
+ email = StringField("email", validators=[DataRequired()])
+ submit = SubmitField('Submit')
 
 
 class UpdateGrade(FlaskForm):
@@ -169,47 +170,29 @@ def update(studentid):
     form = NewStudent(obj=newstudent)
 
     if form.validate_on_submit():
-        studentid = form.studentid
-        firstname = form.firstname
-        lastname = form.lastname
-        major = form.major
-        email = form.email
+        newstudent.studentid = form.studentid.data
+        newstudent.firstname = form.firstname.data
+        newstudent.lastname = form.lastname.data
+        newstudent.major = form.major.data
+        newstudent.email = form.email.data
         db.session.commit()
-        flash('You have successfully edited the department.')
+        flash('You have successfully edited the student.')
 
-        # redirect to the departments page
+        # redirect to the student page
         return redirect(url_for('index'))
 
 
-        form.email = email
-        form.major =major
-        form.lastname = lastname
-        form.firstname = firstname
-        form.studentid = studentid
+        form.email.data = newstudent.email
+        form.major.data = newstudent.major
+        form.lastname.data = newstudent.lastname
+        form.firstname.data = newstudent.firstname
+        form.studentid.data = newstudent.studentid
 
-    return render_template('student/update_student.html', action="Edit",
+    return render_template('update_student.html', action="Edit",
                             form=form, newstudent=newstudent, title="Edit Student")
 
 
 
-    #newfirstname = request.form.get("newfirstname")
-    #oldfirstname = request.form.get("oldfirstname")
-    #student = Student.query.filter_by(firstname=oldfirstname).first()
-    #student.firstname = newfirstname
-    #db.session.commit()
-    #return redirect(url_for('index'))
-
-
-  #  newstudent = Student(request.form['newstudentid'], request.form['newfirstname'], request.form['newlastname'], request.form['newmajor'], request.form['newemail'])
-   # oldstudent = Student(request.form['oldstudentid'], request.form['oldfirstname'], request.form['oldlastname'], request.form['oldmajor'], request.form['oldemail'])
-
-    #student = Student.query.filter_by(student=oldstudent)
-    #newstudent = Student(student)
-    #if request.method == 'POST':
-     #    db.session.commit(newstudent)
-      #   return redirect(url_for('index'))
-    #else:
-     #   return render_template('update_student.html')
 
 #Delete student
 @app.route("/students/<int:studentid>/deletestudent/", methods=['GET', 'POST'])
@@ -235,7 +218,6 @@ def grades():
 
 
         grades = db.engine.execute("SELECT grades.id, grades.studentid, grades.assignmentid, grades.grade, students.firstname, students.lastname, assignments.title, assignments.fullscore FROM grades, students, assignments WHERE grades.studentid = students.studentid AND grades.assignmentid = assignments.assignmentid;")
-
 
 
         return render_template("grades_page.html",grades=grades)
